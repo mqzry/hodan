@@ -1,10 +1,24 @@
 <?xml version="1.0"?>
 <app:HodanClass xmlns="http://www.w3.org/1999/xhtml"
                xmlns:js="js.core" xmlns:ui="js.ui" xmlns:app="app">
+    <!--Configuring the Spreadshirt API-->
+    <data:RestDataSource cid="api" gateway="api" endPoint="https://api.spreadshirt.net/api/v1">
+        <conf:DataSourceConfiguration>
+            <conf:ResourceConfiguration modelClassName="app.model.Design" path="shops/205909/designs" collectionClassName="app.model.Designs"/>
+        </conf:DataSourceConfiguration>
+    </data:MongoDataSource>
+    
     <div class="container">
-        <h1>Congratulations</h1>
+        <h2>{appName}</h2>
         <p>
-            Your Application "{appName}" is running!
+            <ui:Field label="Search keyword">
+                <input type="text" value="{{keyword}}"/>
+            </ui:Field>
         </p>
+    </div>
+    
+    </div class="design-container">
+        <h2>Designs</h2>
+        
     </div>
 </app:HodanClass>

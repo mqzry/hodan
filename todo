@@ -1,0 +1,11 @@
+# Views
+- keyword enter page
+- Design view
+- Results page
+
+# Models
+- Designs collection
+- Design
+
+# Controller
+- connect with API
