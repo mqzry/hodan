@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<app:HodanClass xmlns="http://www.w3.org/1999/xhtml"
+               xmlns:js="js.core" xmlns:ui="js.ui" xmlns:app="app">
+    <div class="container">
+        <h1>Congratulations</h1>
+        <p>
+            Your Application "{appName}" is running!
+        </p>
+    </div>
+</app:HodanClass>
