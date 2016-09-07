@@ -1,13 +1,13 @@
 define(["js/data/Model"], function (Model) {
+ 
     return Model.inherit("app.model.Design", {
         schema: {
-            id: String,
+            id: Number,
+            name: String,
+            href: String,
             resource: String,
-        },
-        defaults: {
-            id: "",
-            resource: ""
-        }//,
+        }
+        //,
         // setCompleted: function (completed) {
         //     this.set("completed", completed);
         // },

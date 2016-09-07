@@ -8,4 +8,6 @@
 - Design
 
 # Controller
-- connect with API
+- collection.$modelFactory is undefined..
+- Look into how the schema influences the data binding
+-

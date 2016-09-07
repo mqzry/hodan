@@ -1,5 +1,5 @@
-define(["js/core/Application"], function (Application) {
-
+define(["js/core/Application", "js/data/DataSource", "app/data/XmlRestDataSource", "app/collection/Designs", "app/model/Design"], 
+    function (Application, DataSource, RestDataSource, Designs, Design) {
         return Application.inherit({
             
             defaults: {
@@ -8,7 +8,7 @@ define(["js/core/Application"], function (Application) {
             
             initialize: function () {
                 this.set('keyword', '');
-                this.set('designs', null)
+                this.set('designs', null);
             },
 
             /***
@@ -18,22 +18,17 @@ define(["js/core/Application"], function (Application) {
              */
             start: function (parameter, callback) {
                 // false - disables autostart
+                this.set('designs', this.$.api.createCollection(Designs));
+                this.$.designs.fetch(function(err, designs){
+                    if(!err){
+                        // returns the fully fetched collection with user models
+                    }
+                });
+
                 this.callBase(parameter, false);
 
                 callback();
             },
-            fetch_designs: function () {
-                var dataSource = this.$.dataSource; // some dataSource
-                var designs = dataSource.createCollection(Collection.of(Design)); // creates a user collection instance
-                designs.fetch({
-                  offset: 100,
-                  limit: 2
-                  }, function(err, userPage){
-                
-                  // returns a collection page with exact 2 users.
-
-                });
-            }
         });
     }
 );
