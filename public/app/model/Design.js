@@ -5,20 +5,15 @@ define(["js/data/Model"], function (Model) {
             id: Number,
             name: String,
             href: String,
-            resource: String,
+           resource: String,
+        },
+        parse: function (data) {
+            data = this.callBase();
+
+            data.href = data['@attributes']['xlink:href'];
+            data.name = data.name['#name'];
+            data.resource = data.resources.resource['@attributes']['xlink:href'];
+            return data;
         }
-        //,
-        // setCompleted: function (completed) {
-        //     this.set("completed", completed);
-        // },
-        // isCompleted: function () {
-        //     return this.$.completed;
-        // },
-        // status: function () {
-        //     return this.$.completed ? "completed" : '';
-        // }.onChange("completed"),
-        // hasTitle: function () {
-        //     return this.$.title.trim().length;
-        // }.onChange("title")
     });
 });

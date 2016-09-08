@@ -1,6 +1,8 @@
 {
     "xamlClasses": [
         "app/Hodan",
+        "app/Test",
+        "app/view/Image",
         "js/svg/SvgDescriptor",
         "js/ui/AutoSuggestionBox",
         "js/ui/ButtonGroup",
@@ -27,9 +29,6 @@
         "js/ui/field/RadioGroup",
         "js/ui/field/Text",
         "js/ui/field/TextArea",
-        "webtest/test/core/DomElementTest",
-        "webtest/test/core/InvalidComponent",
-        "webtest/test/core/InvalidFunctionComponent",
         "webtest/test/core/StageTest",
         "webtest/test/html/SelectTest",
         "webtest/test/ui/ItemsViewTest",

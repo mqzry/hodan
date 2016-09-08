@@ -2,7 +2,7 @@
 <app:HodanClass xmlns="http://www.w3.org/1999/xhtml"
     xmlns:data="js.data" xmlns:conf="js.conf"
     xmlns:js="js.core" xmlns:ui="js.ui"
-    xmlns:app="app"
+    xmlns:app="app" xmlns:view="app.view"
     xmlns:appdata="app.data">
     
     <!--Configuring the Spreadshirt API-->
@@ -14,12 +14,10 @@
     </appdata:XmlRestDataSource>
     
     <div class="container">
-        <h2>{appName}: We have {designs.size()} designs!</h2>
-        The first one has name : {designs.currentDesign()}
-        <p>
-            <ui:Field label="Search keyword">
-                <input type="text" value="{{keyword}}"/>
-            </ui:Field>
-        </p>
+        <h2>We have designs for everyone!</h2>
+        <view:Image src="{design.resource}"/>
+        <div class="like-cont">
+            <ui:Button label="Like" iconClass="icon-white icon-info" type="info" onclick="nextDesign"/>
+        </div>
     </div>
 </app:HodanClass>
