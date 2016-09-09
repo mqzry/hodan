@@ -1,15 +1,13 @@
-define(["js/core/Application", "js/data/DataSource", "app/data/XmlRestDataSource", "app/collection/Designs", "app/model/Design"], 
-    function (Application, DataSource, RestDataSource, Designs, Design) {
+define(["js/data/Query", "js/core/Application", "js/data/DataSource", "app/data/XmlRestDataSource", "app/collection/Designs", "app/model/Design"], 
+    function (Query, Application, DataSource, RestDataSource, Designs, Design) {
         return Application.inherit({
             
             defaults: {
                 appName: 'Hodan'
             },
-            designs: null,
-            
+
             initialize: function () {
                 this.set('keyword', '');
-                this.set('design', null);
                 this.set('designs', null);
             },
 
@@ -20,10 +18,8 @@ define(["js/core/Application", "js/data/DataSource", "app/data/XmlRestDataSource
              */
             start: function (parameter, callback) {
                 // false - disables autostart
-                self = this;
-                this.designs = this.$.api.createCollection(Designs);
-                this.set('designs', this.designs);
-                this.designs.fetch(function(err, designs){
+                this.set('designs', this.$.api.createCollection(Designs));
+                this.get('designs').fetch(function(err, designs){
                     if(!err){
                         // returns the fully fetched collection with user models
                     }
@@ -31,8 +27,28 @@ define(["js/core/Application", "js/data/DataSource", "app/data/XmlRestDataSource
                 this.callBase(parameter, false);
                 callback();
             },
-            nextDesign: function (e) {
-                this.set('design', this.designs.next());
+            Like: function (design, event) {
+                if(!(design instanceof Design)) 
+                    return;
+                design.set("like", true);
+                this.get('designs').addVotedOnDesign(this.get('keyword'), design);
+            },
+            Dislike: function (design, event) {
+                if(!(design instanceof Design)) 
+                    return;
+                design.set("like", false);
+                this.get('designs').addVotedOnDesign(this.get('keyword'), design);
+            },
+            Search: function(event) {
+                var designs = this.get('designs');
+                
+                var expression = new Query.Comparator("like", "name", this.get("keyword"));
+                var query = Query.query();
+                var where = new Query.Where("and");
+                where.expressions.push(expression);
+                query.query.where = where;
+                
+                designs.filter(query);
             }
         });
     }

@@ -3,24 +3,36 @@ define(["js/data/Collection", "app/model/Design", ], function (Collection, Desig
     
     return Collection.inherit("app.collection.Designs", {
         $modelFactory: Design,
-        currentIndex: 0,
-        first: function () {
-            if (this.size() > 0) return this.$items[0];
-        }.on('change', 'add', 'remove'),
-        next: function () {
-            if (this.currentIndex < this.size()){
-                this.currentIndex++;   
-            }
-            return this.current();
+        likedMap: {},
+        addVotedOnDesign: function (key, design){
+            this.likedMap[key] = design;
         },
-        current: function () {
-            if (this.size() > this.currentIndex ) {
-                return this.$items[this.currentIndex];
+        countVotedOn: function () {
+            var total = 0;
+            for (var item of this.$items){
+                if (typeof item.get('like') != 'undefined') 
+                    total++;
             }
-            else {
-                this.currentIndex = 0;
+            return total;
+        },
+        countLiked: function () {
+            var total = 0;
+            for (var item of this.$items){
+                if (item.get('like')) 
+                    total++;
             }
-        }.on('change', 'add', 'remove'),
+            return total;
+            
+        },
+        countNotLiked: function () {
+            var total = 0;
+            for (var item of this.$items){
+                var like = item.get('like');
+                if (typeof like != 'undefined' && !like) 
+                    total++;
+            }
+            return total;
+        },
         size: function () {
             return this.$items.length;
         }.on('change', 'add', 'remove')

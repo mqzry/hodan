@@ -5,7 +5,8 @@ define(["js/data/Model"], function (Model) {
             id: Number,
             name: String,
             href: String,
-           resource: String,
+            resource: String,
+            like: Boolean
         },
         parse: function (data) {
             data = this.callBase();
