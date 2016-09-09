@@ -1,0 +1,7 @@
+<view:LikeDesignClass xmlns="http://www.w3.org/1999/xhtml"
+    display="inline-block" xmlns:view="app.view">
+    <!--<div id="img-container">-->
+    <view:Image src="{imageUrl()}" width="{width}" height="{height}" title="{alt()}"/>
+    <!--<view:LikeButton item=""-->
+    <!--</div>-->
+</view:LikeDesignClass>

@@ -11,7 +11,7 @@ define(["js/data/Model"], function (Model) {
             data = this.callBase();
 
             data.href = data['@attributes']['xlink:href'];
-            data.name = data.name['#name'];
+            data.name = data.name['#text'];
             data.resource = data.resources.resource['@attributes']['xlink:href'];
             return data;
         }

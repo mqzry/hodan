@@ -10,6 +10,7 @@ define(["js/core/Application", "js/data/DataSource", "app/data/XmlRestDataSource
             initialize: function () {
                 this.set('keyword', '');
                 this.set('design', null);
+                this.set('designs', null);
             },
 
             /***
@@ -21,6 +22,7 @@ define(["js/core/Application", "js/data/DataSource", "app/data/XmlRestDataSource
                 // false - disables autostart
                 self = this;
                 this.designs = this.$.api.createCollection(Designs);
+                this.set('designs', this.designs);
                 this.designs.fetch(function(err, designs){
                     if(!err){
                         // returns the fully fetched collection with user models

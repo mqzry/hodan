@@ -3,6 +3,7 @@
         "app/Hodan",
         "app/Test",
         "app/view/Image",
+        "app/view/LikeDesign",
         "js/svg/SvgDescriptor",
         "js/ui/AutoSuggestionBox",
         "js/ui/ButtonGroup",

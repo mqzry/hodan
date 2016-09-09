@@ -14,10 +14,27 @@
     </appdata:XmlRestDataSource>
     
     <div class="container">
-        <h2>We have designs for everyone!</h2>
-        <view:Image src="{design.resource}"/>
-        <div class="like-cont">
-            <ui:Button label="Like" iconClass="icon-white icon-info" type="info" onclick="nextDesign"/>
-        </div>
+        <!--<h2>We have designs for everyone!</h2>-->
+        <!--<p>{design.name}</p>-->
+        <!--<view:Image src="{design.resource}"/>-->
+        <!--<div class="like-cont">-->
+        <!--    <ui:Button label="Like" iconClass="icon-white icon-info" type="info" onclick="nextDesign"/>-->
+        <!--</div>-->
+        
+        <ui:TileList class="article-list"
+            data="{designs}"
+            prefetchItemCount="10"
+            height="900"
+            cols="4"
+            verticalGap="8"
+            horizontalGap="8">
+        <js:Template name="renderer">
+            <div class="design-container">
+                <view:Image src="{item.resource}"/>
+                <ui:Button label="Like" iconClass="" type="" />
+                <ui:Button label="Dislike" iconClass="" type="" />
+            </div>
+        </js:Template>
+    </ui:TileList>
     </div>
 </app:HodanClass>

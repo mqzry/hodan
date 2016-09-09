@@ -1,6 +1,6 @@
 define(["js/ui/View"], function(View) {
 
-    return View.inherit({
+    return View.inherit("app.view.Image", {
 
         defaults: {
            // componentClass: 'sprd-image',
