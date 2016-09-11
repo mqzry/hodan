@@ -15,11 +15,12 @@
     
     <div class="container">
         <h2>We have designs for everyone!</h2>
-        <input type="text" value="{keyword}"/>
-        <ui:Button label="search" iconClass="" type="" onclick="Search"/>
+        <input type="text" value="" id="keyword" autofocus="true"
+            onkeyup="Search"/>
+        <!--<ui:Button label="search" iconClass="" type="" onclick="Search"/>-->
         
         <ui:TileList class="article-list"
-            data="{designs}"
+            data="{filteredDesigns}"
             prefetchItemCount="10"
             height="900"
             cols="4"
@@ -34,5 +35,13 @@
             </div>
         </js:Template>
     </ui:TileList>
+    <div class="voting-containt">
+        <h2> Voting Totals</h2>
+        <ul>
+           <js:Repeat items="{votingMatrix}">
+                <li>Keyword: {item.keyword},</li>
+            </js:Repeat>
+        </ul>
+    </div>
     </div>
 </app:HodanClass>
