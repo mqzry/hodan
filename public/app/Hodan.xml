@@ -13,39 +13,45 @@
         </conf:DataSourceConfiguration>
     </appdata:XmlRestDataSource>
     
-    <div class="container">
-        <h2>We have designs for everyone!</h2>
-        <input type="text" value="" id="keyword" autofocus="true"
-            onkeyup="Search"/>
-        
-        <ui:TileList class="article-list"
-            data="{filteredDesigns}"
-            prefetchItemCount="10"
-            height="900"
-            cols="4"
-            verticalGap="8"
-            horizontalGap="8">
-        <js:Template name="renderer">
-            <div class="design-container">
-                <h2>Like: {item.like}</h2>
-                <view:Image src="{item.resource}"/>
-                <ui:Button label="Like" iconClass="" type="" onclick="Like(item, event)"/>
-                <ui:Button label="Dislike" iconClass="" type="" onclick="Dislike(item, event)"/>
-            </div>
-        </js:Template>
-    </ui:TileList>
-    <div class="voting-containt">
-        <h2> Voting Totals</h2>
-        <ul>
-            
-           <js:Repeat items="{votingMatrix}">
-                <li>Keyword: {item.keyword},
-                    Designs voted on: {item.designs.size()},
-                    Designs liked: {item.designs.countLikes()}
-                    Designs Disliked: {item.designs.countDislikes()}
-                    </li>
-            </js:Repeat>
-        </ul>
-    </div>
+    <div id="app-container">
+        <h1>Welcome to Hodan. We have designs for days!</h1>
+        <div id="search-container">
+            <input type="text" value="" id="keyword" autofocus="true"
+                onkeyup="Search" placeholder="Press enter to search"/>
+        </div>
+        <div id="graphics-viewer">
+            <ui:TileList class="article-list"
+                data="{filteredDesigns}"
+                prefetchItemCount="10"
+                height="900"
+                cols="4"
+                verticalGap="8"
+                horizontalGap="8">
+                <js:Template name="renderer">
+                    <view:LikeDesign src="{item.resource}"
+                        onVoted="Vote(item, event)"/>
+                </js:Template>
+            </ui:TileList>
+        </div>
+        <div id="voting-container">
+            <h2>Voting Result</h2>
+            <table>
+                <colgroup span="4"></colgroup>
+                <tr>
+                    <th>Keyword</th>
+                    <th>Total</th>
+                    <th>Liked</th>
+                    <th>Disliked</th>
+                </tr>
+               <js:Repeat items="{votingMatrix}">
+                    <tr>
+                        <td>{item.keyword}</td>
+                        <td>{item.designs.size()}</td>
+                        <td>{item.designs.countLikes()}</td>
+                        <td>{item.designs.countDislikes()}</td>
+                    </tr>
+                </js:Repeat>
+            </table>
+        </div>
     </div>
 </app:HodanClass>

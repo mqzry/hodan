@@ -1,7 +1,9 @@
 <view:LikeDesignClass xmlns="http://www.w3.org/1999/xhtml"
-    display="inline-block" xmlns:view="app.view">
-    <!--<div id="img-container">-->
-    <view:Image src="{imageUrl()}" width="{width}" height="{height}" title="{alt()}"/>
-    <!--<view:LikeButton item=""-->
-    <!--</div>-->
+    xmlns:view="app.view" xmlns:ui="js.ui">
+    <div class="design-container">
+        <h2>Like: {item.like}</h2>
+        <view:Image src="{imageUrl()}"/>
+        <button name="Like" onclick="Vote(true, event)">Like</button>
+        <button name="dislike" onclick="Vote(false, event)">Dislike</button>
+    </div>
 </view:LikeDesignClass>

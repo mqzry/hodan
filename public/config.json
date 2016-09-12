@@ -29,12 +29,7 @@
         "js/ui/field/Password",
         "js/ui/field/RadioGroup",
         "js/ui/field/Text",
-        "js/ui/field/TextArea",
-        "webtest/test/core/StageTest",
-        "webtest/test/html/SelectTest",
-        "webtest/test/ui/ItemsViewTest",
-        "webtest/test/ui/SelectionViewTest",
-        "webtest/test/ui/TabViewTest"
+        "js/ui/field/TextArea"
     ],
     "namespaceMap": null,
     "rewriteMap": null,

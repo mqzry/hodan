@@ -1,10 +1,19 @@
-define(["app/view/ImageClass"], function(ImageClass){
+define(["xaml!app/view/Image"], function(Image){
 
-    return ImageClass.inherit('app.view.LikeDesignClass',{
+    return Image.inherit('app.view.LikeDesignClass',{
+        // custom event definition
+        events: ["on:Voted"],
+        Vote: function(vote){
+            var eventData = {
+                "vote": vote
+            };
+            console.log(eventData);
+            this.trigger("on:Voted", eventData)
+        },
+        
         // defaults: {
         //     design: null,
-        //     like: null
-        // }
+        // },
         // imageUrl: function () {
         //     return this.$.design.resource || this.$.src;
         // }.onChange('design'),

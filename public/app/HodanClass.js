@@ -34,16 +34,11 @@ define(["js/data/Query", "js/core/Application","js/data/DataSource",
                 this.callBase(parameter, false);
                 callback();
             },
-            Like: function (design, event) {
+            Vote: function (design, event) {
                 if(!(design instanceof Design)) 
                     return;
-                design.set("like", true);
-                this.addVotedOnDesign(this.currentKeyword, design);
-            },
-            Dislike: function (design, event) {
-                if(!(design instanceof Design)) 
-                    return;
-                design.set("like", false);
+                console.log(event);
+                design.set("like", event.$.vote);
                 this.addVotedOnDesign(this.currentKeyword, design);
             },
             Search: function(event) {
@@ -71,18 +66,14 @@ define(["js/data/Query", "js/core/Application","js/data/DataSource",
                 }
                 
                 var votingList = votingMatrix.find(keywordComparer);
+                
                 if (votingList) {
-                    var designsList = votingList.get('designs');
-                    
-                    if(!designsList)
-                        designsList = new VotingList();
-                        
-                    designsList.push(design);
-                    votingList.set('designs', designsList);
+                    votingList.addDesign(design);
                 }
                 else {
                     votingList = new VotingListModel();
                     votingList.set("keyword", this.currentKeyword);
+                    votingList.addDesign(design)
                     votingMatrix.push(votingList);
                 }
             },
