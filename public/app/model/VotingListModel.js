@@ -4,9 +4,6 @@ define(["app/data/VotingList", "js/data/Model"], function (VotingList, Model) {
         schema: {
             keyword: String,
             designs: VotingList
-        },
-        defaults: {
-            keyword: "",
         }
     });
 });

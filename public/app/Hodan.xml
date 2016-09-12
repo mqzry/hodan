@@ -17,7 +17,6 @@
         <h2>We have designs for everyone!</h2>
         <input type="text" value="" id="keyword" autofocus="true"
             onkeyup="Search"/>
-        <!--<ui:Button label="search" iconClass="" type="" onclick="Search"/>-->
         
         <ui:TileList class="article-list"
             data="{filteredDesigns}"
@@ -38,8 +37,13 @@
     <div class="voting-containt">
         <h2> Voting Totals</h2>
         <ul>
+            
            <js:Repeat items="{votingMatrix}">
-                <li>Keyword: {item.keyword},</li>
+                <li>Keyword: {item.keyword},
+                    Designs voted on: {item.designs.size()},
+                    Designs liked: {item.designs.countLikes()}
+                    Designs Disliked: {item.designs.countDislikes()}
+                    </li>
             </js:Repeat>
         </ul>
     </div>

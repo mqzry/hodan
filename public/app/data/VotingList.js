@@ -1,6 +1,9 @@
-define(["js/core/List"], function (List) {
- 
-    return List.inherit("app.data.VotingList", {
+define(["js/data/Collection", "app/model/Design", ], function (Collection, Design) {
+    return Collection.inherit("app.data.VotingList", {
+        $modelFactory: Design,
+        size: function(){
+            return this.$items.length;
+        }.on('change', 'add', 'remove'),
         _countVotes: function (list, kind) {
                 var total = 0;
                 for (var item of list){

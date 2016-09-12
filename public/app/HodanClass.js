@@ -1,8 +1,8 @@
 define(["js/data/Query", "js/core/Application","js/data/DataSource", 
     "app/data/XmlRestDataSource", "app/collection/Designs", "app/model/Design",
-    "app/model/Search", "js/core/List", "app/model/VotingListModel", "js/data/Model"], 
+    "app/model/Search", "js/core/List", "app/data/VotingList", "app/model/VotingListModel", "js/data/Model"], 
     function (Query, Application, DataSource, RestDataSource, Designs, Design, 
-        Search, List, VotingListModel, Model) {
+        Search, List, VotingList, VotingListModel, Model) {
         var ENTER_KEY = 13;
         
         return Application.inherit({
@@ -29,7 +29,6 @@ define(["js/data/Query", "js/core/Application","js/data/DataSource",
                 var votingMatrix = new List();
                 
                 this.set('designs', designs);
-                this.set('search', search);
                 this.set('votingMatrix', votingMatrix);
                 
                 this.callBase(parameter, false);
@@ -45,7 +44,7 @@ define(["js/data/Query", "js/core/Application","js/data/DataSource",
                 if(!(design instanceof Design)) 
                     return;
                 design.set("like", false);
-                this.get('designs').addVotedOnDesign(this.currentKeyword, design);
+                this.addVotedOnDesign(this.currentKeyword, design);
             },
             Search: function(event) {
                 if (event.domEvent.keyCode === ENTER_KEY) {
@@ -61,37 +60,31 @@ define(["js/data/Query", "js/core/Application","js/data/DataSource",
                     
                     var designs = this.get('designs');
                     this.set('filteredDesigns', designs.filter(query));
-            }
-        },
+                }
+            },
             addVotedOnDesign: function (key, design){
                 self = this;
                 var votingMatrix = this.get("votingMatrix");
                 
-                function filterByKeyword(list) {
+                function keywordComparer(list) {
                         return list.$.keyword === self.currentKeyword;
                 }
-                var votingList = votingMatrix.find(filterByKeyword);
+                
+                var votingList = votingMatrix.find(keywordComparer);
                 if (votingList) {
-                    var designsList = votingList.$.designs;
+                    var designsList = votingList.get('designs');
+                    
                     if(!designsList)
-                        designsList = new List();
+                        designsList = new VotingList();
+                        
                     designsList.push(design);
+                    votingList.set('designs', designsList);
                 }
                 else {
                     votingList = new VotingListModel();
                     votingList.set("keyword", this.currentKeyword);
                     votingMatrix.push(votingList);
                 }
-                console.log(votingMatrix);
             },
-            CountDesings: function (votingListModel){
-                return votingListModel.$.designs.size();
-            },
-            CountLikeDesings: function (votingListModel) {
-                return votingListModel.$.designs.countLikes();
-            },
-            CountLikeDesings: function (votingListModel) {
-                return votingListModel.$.designs.countDislikes();
-            }
     });
 });
