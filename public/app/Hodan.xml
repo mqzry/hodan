@@ -14,16 +14,37 @@
     </appdata:XmlRestDataSource>
     
     <div id="app-container">
-        <h1>Welcome to Hodan. We have designs for days!</h1>
-        <div id="search-container">
-            <input type="text" value="" id="keyword" autofocus="true"
-                onkeyup="Search" placeholder="Press enter to search"/>
+        <div id="UI-container">
+            <div id="search-container">
+                <input type="text" value="" id="keyword" autofocus="true"
+                    onkeyup="Search" placeholder="Press enter to search"/>
+            </div>
+            <div id="voting-container">
+                <h2>Results</h2>
+                <table>
+                    <colgroup span="4"></colgroup>
+                    <tr>
+                        <th>Keyword</th>
+                        <th>Total</th>
+                        <th>Liked</th>
+                        <th>Disliked</th>
+                    </tr>
+                   <js:Repeat items="{votingMatrix}">
+                        <tr>
+                            <td>{item.keyword}</td>
+                            <td>{item.designs.size()}</td>
+                            <td>{item.designs.countLikes()}</td>
+                            <td>{item.designs.countDislikes()}</td>
+                        </tr>
+                    </js:Repeat>
+                </table>
+            </div>
         </div>
-        <div id="graphics-viewer">
+        <div id="viewer">
             <ui:TileList class="article-list"
                 data="{filteredDesigns}"
                 prefetchItemCount="10"
-                height="900"
+                height="800"
                 cols="4"
                 verticalGap="8"
                 horizontalGap="8">
@@ -32,26 +53,6 @@
                         onVoted="Vote(item, event)"/>
                 </js:Template>
             </ui:TileList>
-        </div>
-        <div id="voting-container">
-            <h2>Voting Result</h2>
-            <table>
-                <colgroup span="4"></colgroup>
-                <tr>
-                    <th>Keyword</th>
-                    <th>Total</th>
-                    <th>Liked</th>
-                    <th>Disliked</th>
-                </tr>
-               <js:Repeat items="{votingMatrix}">
-                    <tr>
-                        <td>{item.keyword}</td>
-                        <td>{item.designs.size()}</td>
-                        <td>{item.designs.countLikes()}</td>
-                        <td>{item.designs.countDislikes()}</td>
-                    </tr>
-                </js:Repeat>
-            </table>
         </div>
     </div>
 </app:HodanClass>

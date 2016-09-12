@@ -55,6 +55,9 @@ define(["js/data/Query", "js/core/Application","js/data/DataSource",
                     
                     var designs = this.get('designs');
                     this.set('filteredDesigns', designs.filter(query));
+                    
+                    var gfxViewer = document.getElementById("viewer");
+                    gfxViewer.style.visibility = "visible";
                 }
             },
             addVotedOnDesign: function (key, design){
